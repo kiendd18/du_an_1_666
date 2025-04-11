@@ -97,7 +97,7 @@ function select_all_order_product_by_email_and_phone_number_status($email, $phon
     JOIN order_product ON orders.order_id = order_product.order_id 
     JOIN products ON products.product_id = order_product.product_id 
     WHERE orders.receiver_email = ? AND orders.receiver_number_phone = ? AND orders.status_id = ?";
-    return pdo_query($sql, $email, $phone_number,  $status);
+    return pdo_query($sql, $email, $phone_number, $status);
 }
 function count_email_and_phone_number($email, $phone_number)
 {
@@ -182,8 +182,13 @@ function sum_product_quantities_by_id($product_id)
 }
 function total()
 {
-    $sql = 'SELECT SUBSTR(created_at, 6, 2) as thang,SUBSTR(created_at, 9, 2) as ngay, SUM(total_price) as tong, created_at FROM `purchased_orders`';
-    return pdo_query_one($sql);
+    $sql = 'SELECT 
+                SUBSTR(created_at, 6, 2) as thang, 
+                SUBSTR(created_at, 9, 2) as ngay, 
+                SUM(total_price) as tong 
+            FROM purchased_orders 
+            GROUP BY thang, ngay';
+    return pdo_query($sql); // => Trả về nhiều dòng, nên dùng pdo_query, không phải pdo_query_one
 }
 
 function doanhthu_ngay()
@@ -207,12 +212,16 @@ function doanhthu_ngay()
 
 function doanhthu_thang()
 {
-    $sql = 'SELECT SUBSTR(created_at, 1, 4) AS nam, SUBSTR(created_at, 6, 2)  as thang,SUBSTR(created_at, 9, 2) 
-    as ngay,total_price,purchased_order_id,sum(total_price) 
-    as doanhthuthang,
-    COUNT(purchased_order_id) AS soluongdonhang
-    FROM `purchased_orders` 
-    group by SUBSTR(created_at, 6, 2)';
+    $sql = '
+        SELECT 
+            SUBSTR(created_at, 1, 4) AS nam,
+            SUBSTR(created_at, 6, 2) AS thang,
+            SUM(total_price) AS doanhthuthang,
+            COUNT(purchased_order_id) AS soluongdonhang
+        FROM purchased_orders
+        GROUP BY nam, thang
+        ORDER BY nam, thang
+    ';
     return pdo_query($sql);
 }
 

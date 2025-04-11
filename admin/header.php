@@ -7,12 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Routine</title>
   <link rel="icon" type="image/x-icon" href="https://routine.vn/media/favicon/default/output-onlinejpgtools.png" />
-  <link rel="shortcut icon" type="image/x-icon" href="https://routine.vn/media/favicon/default/output-onlinejpgtools.png" />
+  <link rel="shortcut icon" type="image/x-icon"
+    href="https://routine.vn/media/favicon/default/output-onlinejpgtools.png" />
   <link rel="preconnect" href="https://fonts.gstatic.com/" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap"
+    rel="stylesheet" />
   <link href="../../../unpkg.com/boxicons%402.0.7/css/boxicons.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="../..<?= $ROOT_URL . $SRC_URL . $ADMIN_URL ?>/libs/owl.carousel/assets/owl.carousel.min.css" />
+  <link rel="stylesheet"
+    href="../..<?= $ROOT_URL . $SRC_URL . $ADMIN_URL ?>/libs/owl.carousel/assets/owl.carousel.min.css" />
   <link rel="stylesheet" href="../..<?= $ROOT_URL . $SRC_URL . $ADMIN_URL ?>/css/bootstrap.min.css" />
   <link rel="stylesheet" href="../..<?= $ROOT_URL . $SRC_URL . $ADMIN_URL ?>/css/grid.css" />
   <link rel="stylesheet" href="../..<?= $ROOT_URL . $SRC_URL . $ADMIN_URL ?>/css/style1.css" />
@@ -32,7 +38,7 @@
 <body class="sidebar-expand">
   <div class="sidebar">
     <div class="sidebar-logo">
-      <a href="../..<?= $ROOT_URL ?>/admin/index.php">
+      <a href="../..<?= $ROOT_URL ?>/index.php?act=home">
         <img src="../..<?= $ROOT_URL . $ASSET_URL; ?>/images/logo.png" alt="Protend logo" width="200px" />
         <style>
           .sidebar-logo img {
@@ -40,10 +46,9 @@
             height: auto;
           }
 
-          .error small{
+          .error small {
             color: red;
           }
-        
         </style>
       </a>
       <div class="sidebar-close" id="sidebar-close">
@@ -120,4 +125,4 @@
     </div>
   </div>
   <script>
- </script>
+  </script>
