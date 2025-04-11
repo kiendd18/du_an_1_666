@@ -14,17 +14,17 @@ require ".$MODEL_URL/orders.php";
 $action = isset($_GET['action']) ? $_GET['action'] : 'index';
 // echo $action;
 switch ($action) {
-  case 'test': 
+  case 'test':
     require ".$VIEW_URL/test.php";
     break;
   case 'index';
-  // echo $action;
+    // echo $action;
     require ".$VIEW_URL/main.php";
     break;
-  case 'orders_history': 
+  case 'orders_history':
     require ".$VIEW_URL/orders_history.php";
-  break;
-    // ----------San Pham---------------
+    break;
+  // ----------San Pham---------------
   case 'male-fashion':
     require ".$VIEW_URL/male-fashion.php";
     break;
@@ -37,11 +37,11 @@ switch ($action) {
   case 'news-fashion':
     require ".$VIEW_URL/news-fashion.php";
     break;
-   case 'sale-fashion':
+  case 'sale-fashion':
     require ".$VIEW_URL/sale-fashion.php";
     break;
   // Bổ sung product DETAIL và chức năng add vào cart
-  case "order_purchased": 
+  case "order_purchased":
     require ".$VIEW_URL/orders.php";
     break;
   case 'check-quanity':
@@ -50,22 +50,22 @@ switch ($action) {
   case 'add_to_cart':
     require ".$CONTROLLER_URL/add_to_cart.php";
     break;
-   case 'product_add_quantity_to_cart':
+  case 'product_add_quantity_to_cart':
     require ".$CONTROLLER_URL/product_add_quantity_to_cart.php";
     break;
   case 'get_product_info':
     require ".$CONTROLLER_URL/get_product_info.php";
     break;
   // ------------- Bình Luận --------------
-   case 'delete_bl':
+  case 'delete_bl':
     require ".$CONTROLLER_URL/delete_bl.php";
     break;
   case 'update_bl':
     require ".$CONTROLLER_URL/update_bl.php";
     break;
 
-    // ------------Tài Khoản---------------
-    case 'login':
+  // ------------Tài Khoản---------------
+  case 'login':
     if (isset($_POST['login'])) {
       $username = $_POST['username'];
       $password = $_POST['password'];
@@ -84,7 +84,7 @@ switch ($action) {
     break;
   case 'quenmk':
     if (isset($_POST['btnsubmit'])) {
-      $email  = $_POST['email'];
+      $email = $_POST['email'];
       $checkemail = checkemail($email);
       if (is_array($checkemail)) {
         echo "<script>
@@ -127,7 +127,7 @@ switch ($action) {
       $phone = $_POST['phone'];
       $address = $_POST['address'];
       $full_name = $_POST['full_name'];
-      $role = $_POST['role'];
+      $role = isset($_POST['role']) ? (int) $_POST['role'] : 0;
       update_taikhoan($id, $full_name, $username, $password, $email, $address, $phone, $role);
       $_SESSION['username'] = checkuser($username, $password);
       echo '<script>alert("Bạn đã cập nhật thông tin thành công")</script>';
@@ -151,7 +151,7 @@ switch ($action) {
 
 
 
-     // ------------Bộ lọc----------
+  // ------------Bộ lọc----------
   case 'ao_new':
     require ".$VIEW_URL/boloc/ao-new.php";
     break;
@@ -242,8 +242,8 @@ switch ($action) {
   case 'color_filter_sale':
     require ".$VIEW_URL/boloc/mau-sac-sale.php";
     break;
-  
-   // -----------Product detail and cart--------------
+
+  // -----------Product detail and cart--------------
   case 'check-quanity':
     require ".$CONTROLLER_URL/check_product_quantity.php";
     break;
@@ -300,7 +300,7 @@ switch ($action) {
     break;
 
   default:
-    echo 'Đang làm thêm trang 404';
+    echo 'lỗi 404';
     break;
 }
 

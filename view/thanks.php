@@ -93,15 +93,17 @@
     <li>Thanh toán MOMO</li>
 </ul>
 <div class="wrapper" style="height: calc(100vh - 7.5rem)">
-    <?php if ($_GET['message'] == "Giao dịch bị từ chối bởi người dùng.") : ?>
+    <?php if (isset($_GET['message']) && $_GET['message'] == "Giao dịch bị từ chối bởi người dùng."): ?>
         <div class="empty_product__notifi">
             Thanh toán thất bại
         </div>
-        <?php else : ?>
+    <?php else: ?>
         <div class="empty_product__notifi">
             Thanh toán thành công, đơn hàng đang được xử lý,nhanh chóng được gửi đến bạn.
         </div>
-        <a href="<?= $ROOT_URL ?>/order_details_infomation" style="text-align: center;display: block;margin: 12px 0;"><button type="button">Xem đơn hàng của bạn</button></a>
+        <a href="<?= $ROOT_URL ?>/order_details_infomation"
+            style="text-align: center;display: block;margin: 12px 0;"><button type="button">Xem đơn hàng của
+                bạn</button></a>
     <?php endif ?>
 </div>
 <?php require "./includes/footer.php" ?>
