@@ -22,6 +22,7 @@
                     <?php foreach ($listtaikhoan as $tk) :
                         extract($tk);
                         $xoatk = "index.php?act=xoatk&id=" . $id;
+                        $activetk = "index.php?act=activetk&id=" . $id;
                         $suatk = "index.php?act=suatk&id=" . $id;
                     ?>
                         <tr>
@@ -38,9 +39,13 @@
                                 } ?></td>
                             <td>
                                 <a href="<?= $suatk ?>"><input class="btn btn-success" type="button" name="suatk" value="Sửa"></a>
-                                <?php if ($_SESSION['username']['id'] != $id) : ?>
-                                    <a href="<?= $xoatk ?>"><input class="btn btn-warning" type="button" value="Xóa"></a>
-                                <?php endif ?>
+                               <?php if ($_SESSION['username']['id'] != $id) : ?>
+                                    <?php if ($tk['isActive']) : ?>
+                                        <a href="<?= $xoatk ?>"><input class="btn btn-warning" type="button" value="Dừng hoạt động"></a>
+                                    <?php else : ?>
+                                        <a href="<?= $activetk ?>"><input class="btn btn-success" type="button" value="Kích hoạt"></a>
+                                    <?php endif; ?>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach ?>

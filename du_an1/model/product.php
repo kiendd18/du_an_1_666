@@ -11,10 +11,10 @@ function add_images_product($images, $color_name_id, $product_id)
     $sql = "INSERT INTO images(image_url,color_name_id,product_id) VALUES(?,?,?)";
     pdo_execute($sql, $images, $color_name_id, $product_id);
 }
-function selectAll_product($sortDescending,$product_status)
+function selectAll_product($sortDescending, $product_status)
 {
     $sql = "SELECT * FROM products WHERE product_status = ? ORDER BY product_id " . ($sortDescending ? "DESC" : "ASC");
-    return pdo_query($sql,$product_status);
+    return pdo_query($sql, $product_status);
 }
 function select_product_color_by_id($product_id)
 {
@@ -68,7 +68,7 @@ function select_all_color()
 }
 function select_product_color($product_code)
 {
-$sql = "SELECT color_name.*,product_color.* FROM products JOIN product_color ON products.product_id = product_color.product_id 
+    $sql = "SELECT color_name.*,product_color.* FROM products JOIN product_color ON products.product_id = product_color.product_id 
         JOIN color_name ON product_color.color_name_id = color_name.color_name_id WHERE products.product_code = ?";
     return pdo_query($sql, $product_code);
 }
@@ -133,7 +133,7 @@ function product_update($product_name, $product_price, $product_main_image, $pro
 {
     $sql = "UPDATE products SET product_name = ?, product_price = ?,main_image_url = ?,hover_main_image_url = ?,discount = ?,product_code = ?,product_desc = ?,category_id = ? 
     WHERE product_id = ?";
-pdo_execute($sql, $product_name, $product_price, $product_main_image, $product_hover_main_image, $product_discount, $product_code, $product_description, $category_id, $product_id);
+    pdo_execute($sql, $product_name, $product_price, $product_main_image, $product_hover_main_image, $product_discount, $product_code, $product_description, $category_id, $product_id);
 }
 function select_all_product_by_category($product_id)
 {
@@ -151,7 +151,7 @@ function add_image($product_image, $tmp_image, $folder_root)
         $file_name = uniqid() . $product_image['name'];
         if (move_uploaded_file($tmp_image, $folder_name . $file_name)) {
             $folder_name = "$folder_root/images/";
-            $save_img = $folder_name . $file_name; 
+            $save_img = $folder_name . $file_name;
         };
         return $save_img;
     } else {
@@ -301,7 +301,7 @@ function delete_images_by_product_id($product_id)
 }
 function add_product_size($product_id, $size_id)
 {
-$sql = "INSERT INTO product_size(product_id,size_id) VALUES(?,?)";
+    $sql = "INSERT INTO product_size(product_id,size_id) VALUES(?,?)";
     return pdo_execute($sql, $product_id, $size_id);
 }
 function add_product_color($product_id, $color_name_id)
@@ -346,10 +346,16 @@ function delete_size($size_id)
 //     return pdo_query($sql, $product_id);
 // }
 
-function select_all_product_admin()
+function select_all_product_admin($query = '')
 {
-    $sql = "SELECT * FROM products";
-    return pdo_query($sql);
+    if (!empty($query)) {
+        $search = "%" . $query . "%";
+        $sql = "SELECT * FROM products WHERE product_name LIKE ?";
+        return pdo_query($sql, $search);
+    } else {
+        $sql = "SELECT * FROM products";
+        return pdo_query($sql);
+    }
 }
 function select_quantity_by_size($size_id, $color_name_id, $product_id)
 {
@@ -397,12 +403,12 @@ function check_product_exist($product_code)
 function count_all_products($category_id)
 {
     $sql = "SELECT COUNT(*) FROM products WHERE category_id = ?";
-    return pdo_query_value($sql,$category_id);
+    return pdo_query_value($sql, $category_id);
 }
 function count_allnews_products($product_status)
 {
     $sql = "SELECT COUNT(*) FROM products WHERE product_status = ?";
-    return pdo_query_value($sql,$product_status);
+    return pdo_query_value($sql, $product_status);
 }
 
 function selectAll_product_phantrang($category_id, $sortDescending, $start, $limit)
@@ -410,10 +416,10 @@ function selectAll_product_phantrang($category_id, $sortDescending, $start, $lim
     $sql = "SELECT * FROM products WHERE category_id = ? ORDER BY product_id " . ($sortDescending ? "DESC" : "ASC") . " LIMIT $start, $limit";
     return pdo_query($sql, $category_id);
 }
-function selectAll_news_product_phantrang($sortDescending, $start, $limit,$product_status)
+function selectAll_news_product_phantrang($sortDescending, $start, $limit, $product_status)
 {
     $sql = "SELECT * FROM products WHERE product_status = ? ORDER BY product_id " . ($sortDescending ? "DESC" : "ASC") . " LIMIT $start, $limit";
-    return pdo_query($sql,$product_status);
+    return pdo_query($sql, $product_status);
 }
 function check_color_name_exist($color_name)
 {
@@ -522,7 +528,7 @@ function quantity_update($quantity, $product_id, $color_name_id, $size_id)
     pdo_execute($sql, $quantity, $product_id, $color_name_id, $size_id);
 }
 function quantity_decrease($quantity, $product_id, $color_name_id, $size_id)
-{   
+{
     $sql = "UPDATE quantities SET quantity = quantity - ? WHERE product_id = ? AND color_name_id = ? AND size_id = ?";
     pdo_execute($sql, $quantity, $product_id, $color_name_id, $size_id);
 }

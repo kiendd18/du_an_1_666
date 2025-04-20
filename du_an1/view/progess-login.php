@@ -11,9 +11,15 @@ if (isset($_POST['login'])) {
     $checkuser = checkuser($username, $password);
 
     if (is_array($checkuser)) {
-        $_SESSION['username'] = $checkuser;
-        echo '<script>alert("Đăng nhập thành công"); window.location="../index.php";</script>';
+        if ($checkuser['isActive']) {
+            $_SESSION['username'] = $checkuser;
+            echo '<script>alert("Đăng nhập thành công"); window.location="../index.php";</script>';
+        } else {
+            echo '<script>alert("Tài khoản của bạn đã bị vô hiệu hóa"); window.location="../index.php";</script>';
+        }
     } else {
         echo '<script>alert("Tài khoản hoặc mật khẩu không tồn tại"); window.location="../index.php";</script>';
     }
+
+
 }
