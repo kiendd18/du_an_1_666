@@ -15,7 +15,7 @@ if (isset($_SESSION['username']) && ($_SESSION['username']['role'] == 1)) {
         case 'index':
             require "./view/main.php";
             break;
-        // ---------------Xử lí Banner-------------------    
+            // ---------------Xử lí Banner-------------------    
         case 'add_banner':
             require ".$BANNER_URL/add_banner.php";
             break;
@@ -28,7 +28,7 @@ if (isset($_SESSION['username']) && ($_SESSION['username']['role'] == 1)) {
         case 'delete_banner':
             require ".$BANNER_URL/delete_banner.php";
             break;
-        // ---------------Xử lí Sản Phẩm-------------------    
+            // ---------------Xử lí Sản Phẩm-------------------    
         case 'add_product':
             require ".$PRODUCT_URL/add_product.php";
             break;
@@ -68,7 +68,7 @@ if (isset($_SESSION['username']) && ($_SESSION['username']['role'] == 1)) {
         case 'check_duplicate_color':
             require ".$PRODUCT_URL/check_duplicate_color.php";
             break;
-        // ---------------Xử lí Comment-------------------
+            // ---------------Xử lí Comment-------------------
         case 'view_comment':
             require ".$COMMENT_URL/commentList.php";
             break;
@@ -107,13 +107,13 @@ if (isset($_SESSION['username']) && ($_SESSION['username']['role'] == 1)) {
             $list = listCategory();
             include "./categories/list-danhmuc.php";
             break;
-        // case "updateCategory":
+            // case "updateCategory":
 
-        //     require "./categories/edit-danhmuc.php";
-        //     break;
+            //     require "./categories/edit-danhmuc.php";
+            //     break;
 
-        //--------------------------PHẦN TÀI KHOẢN-----------------------------------------
-        // DANH SÁCH TÀI KHOẢN
+            //--------------------------PHẦN TÀI KHOẢN-----------------------------------------
+            // DANH SÁCH TÀI KHOẢN
         case 'user':
             $listtaikhoan = loadall_taikhoan();
             // echo $listtaikhoan; die;
@@ -121,7 +121,7 @@ if (isset($_SESSION['username']) && ($_SESSION['username']['role'] == 1)) {
             break;
 
 
-        // XÓA TÀI KHOẢN
+            // XÓA TÀI KHOẢN
         case 'xoatk':
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 delete_taikhoan($_GET['id']);
@@ -129,7 +129,14 @@ if (isset($_SESSION['username']) && ($_SESSION['username']['role'] == 1)) {
             $listtaikhoan = loadall_taikhoan();
             include "./user/list.php";
             break;
-        // SỬA TÀI KHOẢN
+            // SỬA TÀI KHOẢN
+        case 'activetk':
+            if (isset($_GET['id']) && ($_GET['id'] > 0)) {
+                enable_taikhoan($_GET['id']);
+            }
+            $listtaikhoan = loadall_taikhoan();
+            include "./user/list.php";
+            break;
         case 'suatk':
             if (isset($_GET['id']) && ($_GET['id'] > 0)) {
                 $tk = loadone_taikhoan($_GET['id']);
@@ -137,7 +144,7 @@ if (isset($_SESSION['username']) && ($_SESSION['username']['role'] == 1)) {
             $listtaikhoan = loadall_taikhoan();
             include "./user/update.php";
             break;
-        // UPDATE TÀI KHOẢN
+            // UPDATE TÀI KHOẢN
         case 'updatetk':
             if (isset($_POST['id']) && ($_POST['id'] > 0)) {
                 $id = $_POST['id'];
@@ -149,7 +156,7 @@ if (isset($_SESSION['username']) && ($_SESSION['username']['role'] == 1)) {
                 $phone = $_POST['phone'];
                 $role = $_POST['role'];
 
-                $listsanpham = update_taikhoan($id, $full_name, $username, $password, $email, $address, $phone, $role, );
+                $listsanpham = update_taikhoan($id, $full_name, $username, $password, $email, $address, $phone, $role,);
                 $thongbao = "Cập nhật thành công";
             }
             $listtaikhoan = loadall_taikhoan();
@@ -161,7 +168,27 @@ if (isset($_SESSION['username']) && ($_SESSION['username']['role'] == 1)) {
         case 'check-phantrang':
             require "./admin/check-phantrang.php";
             break;
+            // ------------------ Orders -------------------
+        case 'view_bill':
+            require "./bill/bill_list.php";
+            break;
 
+        case 'detail_bill':
+            require "./bill/bill_detail.php";
+            break;
+        case 'change_status':
+            require "./bill/change_status.php";
+            break;
+
+        case 'thongke':
+            require_once "./thongke/thongke.php";
+            break;
+        case 'ngay':
+            require_once "./thongke/thongkengay.php";
+            break;
+        case 'thang':
+            require_once "./thongke/thongkeythang.php";
+            break;
         default:
             echo "Không có gì ";
             echo "admin";

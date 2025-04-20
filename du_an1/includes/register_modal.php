@@ -6,7 +6,7 @@
           <?php
        
           ?>
-          <form action="./du_an1/view/progess-signup.php" method="POST" id="register-form">
+          <form action="./view/progess-signup.php" method="POST" id="register-form">
             <div class="form-group">
               <label for="full_name">Full Name*</label>
               <input type="text" name="full_name" id="full_name" plac eholder="Full name" required />
@@ -33,7 +33,7 @@
               <input type="text" name="phone" id="phone" placeholder="Your phone" required />
             </div>
 
-            <button type="submit" id="submit-btn" class="buttonregister" name="dangky">Đăng ký</button>
+            <button type="submit" class="buttonregister" name="dangky">Đăng ký</button>
           </form>
         </div>
       </div>

@@ -25,11 +25,38 @@ function add_order_product($order_id, $product_id, $size_id, $color_name_id, $qu
     $sql = "INSERT INTO order_product(order_id,product_id,size_id,color_name_id,quantity) VALUES(?,?,?,?,?)";
     pdo_execute($sql, $order_id, $product_id, $size_id, $color_name_id, $quantity);
 }
-function select_all_orders()
+function select_all_orders($receiver_name = '', $from_date = '', $to_date = '', $status_id = '')
 {
-    $sql = "SELECT orders.* FROM orders ORDER BY created_at DESC";
-    return pdo_query($sql);
+    $sql = "SELECT orders.* FROM orders WHERE 1=1";  
+    $params = [];  
+
+    if ($receiver_name !== '') {
+        $sql .= " AND receiver_name LIKE ?";
+        $params[] = '%' . $receiver_name . '%';
+    }
+
+    if ($from_date !== '') {
+        $sql .= " AND created_at >= ?";
+        $params[] = $from_date;
+    }
+
+    if ($to_date !== '') {
+        $sql .= " AND created_at <= ?";
+        $params[] = $to_date;
+    }
+
+    if ($status_id !== '') {
+        $sql .= " AND status_id = ?";
+        $params[] = $status_id;
+    }
+
+    $sql .= " ORDER BY created_at DESC";  
+
+    return pdo_query($sql, ...$params);
 }
+
+
+
 function select_all_order_product_admin_by_id($order_id)
 {
     $sql = "SELECT orders.*,order_product.*,products.* FROM orders 

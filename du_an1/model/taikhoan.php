@@ -19,13 +19,22 @@
         $sp=pdo_query_one($sql);
         return $sp;
     }
+    function get_user_by_id($id) {
+        $sql =  "SELECT *FROM user where id ='".$id."'";
+        $sp = pdo_query_one($sql);
+        return $sp;
+    }
     function loadall_taikhoan(){
         $sql = "SELECT * FROM user order by id desc";
         $listtaikhoan = pdo_query($sql);
         return $listtaikhoan;
     }
     function delete_taikhoan($id){
-        $sql = "DELETE from user where id=".$id;
+        $sql = "UPDATE user SET isActive = 0 WHERE id = ".$id;
+        pdo_execute($sql);
+    }
+    function enable_taikhoan($id){
+        $sql = "UPDATE user SET isActive = 1 WHERE id = ".$id;
         pdo_execute($sql);
     }
     function loadone_taikhoan($id){

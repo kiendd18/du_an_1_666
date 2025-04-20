@@ -61,8 +61,8 @@ $(document).ready(function () {
     let customerEmail = $("#customerEmail");
     let customerNote = $("#customerNote");
     let paymenMethod = paymentMethods;
-    console.log(paymenMethod);
-    // validate form basic
+  
+    // Validate
     if (customerfirstAndLastName.val() === "") {
       isCheck = true;
       $(".order-notifi_name").text("Họ và tên không được để trống");
@@ -78,10 +78,13 @@ $(document).ready(function () {
     if (customerEmail.val() === "") {
       isCheck = true;
       $(".order-notifi_email").text("Email không được để trống");
-      if (isCheck) {
-        return;
-      }
     }
+  
+    if (isCheck) {
+      return;
+    }
+  
+    // Gửi Ajax
     $.ajax({
       type: "POST",
       url: "../../du_an1/index.php?action=order_handle",
@@ -95,24 +98,30 @@ $(document).ready(function () {
         pay_methods: paymenMethod,
       },
       dataType: "json",
-      success: function (responve) {
-        console.log(responve);
+      success: function (response) {
+        console.log(response)
         reloadShowQuantity();
-        if (typeof responve === "number") {
-          $("#payMenttotalPrice").val(responve);
-          $("#startPayment").click();
-        } else {
-          alert("Đặt hàng thành công, đang xử lý đơn hàng");
-          setTimeout(() => {
-            location.href = `/du_an1/order_details_infomation?id=1`;
-          }, 1);
+        if(response === 'block'){
+          alert('Tài khoản của bạn đã bị khóa vui lòng liên lạc tới chúng tôi để biết thêm chi tiết.')
+        }else{
+          if (typeof response === "number") {
+            $("#payMenttotalPrice").val(response);
+            $("#startPayment").click();
+          } else {
+            alert("Đặt hàng thành công, đang xử lý đơn hàng");
+            setTimeout(() => {
+              location.href = `/du_an1/order_details_infomation?id=1`;
+            }, 1);
+          }
         }
       },
       error: function (error) {
-        console.log(error);
+        console.log("Lỗi khi gửi đơn hàng:", error);
       },
     });
   });
+  
+  
   $(".cancel_order").on("click", function () {
     const that = this;
     let ischeck = confirm("Bạn có muốn hủy đơn hàng ?");

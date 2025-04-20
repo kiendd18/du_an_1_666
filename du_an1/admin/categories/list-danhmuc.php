@@ -17,26 +17,27 @@
                         foreach ($list as $key) {
                             extract($key);
                             $edit = "index.php?act=editCategory&id_cate=$id_category";
-                            $delete = "index.php?act=deleteCategory&id_cate=$id_category";
+
                         ?>
                             <tr>
                                 <td></td>
                                 <td><?php echo $name_category ?></td>
                                 <td>
                                     <a href="<?php echo $edit ?>"><input class="btn btn-success" type="button" value="Sửa"></a>
-                                    <a href="<?php echo $delete ?>" onclick="return confirm('Bạn có chắc chắn muốn xóa danh mục này không?')">
-                                        <input class="btn btn-danger" type="button" value="Xóa">
-                                    </a>
                                 </td>
                             </tr>
+
                         <?php
                         }
                         ?>
                     </tbody>
                 </table>
             </form>
+
         </div>
+
     </div>
 </div>
+
 
 <div class="overlay"></div>
